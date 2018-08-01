@@ -8,10 +8,11 @@ using namespace std;
 
 bool match(char a, char b);
 char get_output(char a, char k);
+void apply_xor(string line, string key);
 
 int main(int argc, char** argv){
 
-	string key = "fff";
+	string key = "god";
 	cout << "Using key: " << key << endl;
 
 	string del = ",";
@@ -28,21 +29,24 @@ int main(int argc, char** argv){
 
 
 	string token;
-	size_t pos = 0;
+	size_t pos = 0;	
 
-	int key_index = 0;	
+	apply_xor(temp, key);
 
+	//if (1 == 1)
+		//return 0;
+	
 	for (int in = 33; in < 127; in++){
 	int broken = 0;
-
 	string line = temp;
+	int key_index = 0;
 	while ((pos = line.find(del)) != string::npos){
 		token = line.substr(0, pos);
 		line.erase(0, pos+1);
 		//cout << "!!" << endl;
 		key_index %=3;
 
-		if (key_index != 2){
+		if (key_index != 1){
 			key_index++;
 			continue;
 		}
@@ -77,8 +81,31 @@ int main(int argc, char** argv){
 }
 
 
-string apply_xor(string line, string key){
+void apply_xor(string line, string key){
 
+	int pos = 0;
+	string token;
+	string del = ",";
+	int key_index = 0;
+
+	while ((pos = line.find(del)) != string::npos){
+		token = line.substr(0, pos);
+		line.erase(0, pos+1);
+		//cout << "!!" << endl;
+		key_index %=3;
+
+		int t;
+
+		stringstream ss(token);
+		ss >> t;
+		char o = get_output(t, key[key_index]);
+		cout << o;
+
+		key_index++;
+
+	}
+
+	cout << endl;
 	
 
 }
